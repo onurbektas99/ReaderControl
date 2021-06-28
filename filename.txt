@@ -1,0 +1,5 @@
+|||AMA BÖYLE OLMAZ|||		|||Mesaj Yapısı|||		|||Veri Boyu|||		|||Deren ID|||		|||1 Byte|||		|||Derin ID|||		|||1 Byte|||		|||Masaj ID|||		|||2 Byte|||		||| |||		|||Dere Boyu|||		|||4 Byte|||		|||Dere|||		|||N Byte|||		|||MESAJ ADI|||		|||Mesaj ID|||		||| Mesaj VERİ BOYU (byte)|||		|||Mesaj Veri İçeriği|||		|||Veri index|||		|||Veri Boyu|||		|||Veri tipi|||		|||Veri birimi|||		|||Veri çözünürlük|||		|||Verinin Alabileceği Değerler|||		|||Mesaj Gönderim Sıklığı|||		|||Yön|||		|||Açıklama|||		|||ASAGIDAKI MESAJLAR HAYALGÜCÜM ARAYUZUNDE TANIMLI OLUP BU ARAYUZDE KULLANILmaYACAKTIR.|||		|||Örnek|||		|||Nurşah No|||		|||Nurşah No|||		|||1.0|||		|||uint8|||		|||0: Bilinmiyor
+1: Enum-1
+2: Eleman - 2|||		|||Alındığında|||		|||Kırıldığında|||		|||Bu Devirde|||		|||KimseNurşah Değil|||		|||1.0|||		|||uint8|||		|||0: Bilinmiyor
+1: Bezirgan-1
+2: Sibel - Can|||		|||Deneme|||		
