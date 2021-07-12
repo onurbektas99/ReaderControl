@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 
+import org.apache.commons.lang3.StringUtils;
+
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.FormulaEvaluator;
 import org.apache.poi.ss.usermodel.Row;
@@ -16,13 +18,14 @@ public class ReaderClass {
 
     public static void main(String[] args) throws IOException {
     	Scanner in = new Scanner(System.in);
+    	String text;
     	int num = in.nextInt();
     	while(num != -1) {
         FileInputStream fis = new FileInputStream(new File("./src/latestReader/Ekinoks_Test_Excel.xlsx"));
 
         XSSFWorkbook workbook = new XSSFWorkbook(fis);
 
-        XSSFSheet sheet = workbook.getSheetAt(num);
+        XSSFSheet sheet = workbook.getSheetAt(0);
 
         
         FormulaEvaluator formulaEvaluator = workbook.getCreationHelper().createFormulaEvaluator();
@@ -34,12 +37,19 @@ public class ReaderClass {
                 switch (formulaEvaluator.evaluateInCell(cell).getCellType()) {
 
                     case Cell.CELL_TYPE_NUMERIC:
-                        System.out.print("|||" + cell.getNumericCellValue() + "|||" + "\t\t");
-                        myWriter.write("|||" + cell.getNumericCellValue() + "|||" + "\t\t");
+                    	
+                        System.out.print(cell.getNumericCellValue() + "\t\t");
+                        myWriter.write(cell.getNumericCellValue() + "\t\t");
                         break;
                     case Cell.CELL_TYPE_STRING:
-                        System.out.print("|||" + cell.getStringCellValue() + "|||" + "\t\t");
-                        myWriter.write("|||" + cell.getStringCellValue() + "|||" + "\t\t");
+                    	
+                        text = cell.getStringCellValue();
+                        text=text.replaceAll("[-]", " ");
+                        text=text.replaceAll("[.]", "_");
+                        text=text.replaceAll("ı", "i");
+                        text = StringUtils.stripAccents(text);
+                        System.out.print((convert(text)) + "\t\t");
+                        myWriter.write(convert(text) + "\t\t");
                         break;
                 }
 
@@ -61,4 +71,36 @@ public class ReaderClass {
 
     }
     
+
+static String convert(String s)
+{
+
+    int cnt= 0;
+    int n = s.length();
+    char ch[] = s.toCharArray();
+    int res_ind = 0;
+
+    for (int i = 0; i < n; i++)
+    {
+
+        if (ch[i] == ' ')
+        {
+            cnt++;
+            ch[0] = Character.toLowerCase(ch[0]);
+            
+            // burda i'den n'e kadar dönüyosun ama en son döngüde i+1 ile dizinin dışına çıkıyosun
+            
+            if(i != n - 1) {
+            	
+            	ch[i + 1] = Character.toUpperCase(ch[i + 1]);
+            }
+            continue;
+        }
+
+        else {
+            ch[res_ind++] = ch[i];
+        }
+    }
+    return String.valueOf(ch, 0, n - cnt);
+}
 }
