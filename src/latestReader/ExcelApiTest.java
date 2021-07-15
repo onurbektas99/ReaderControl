@@ -54,6 +54,10 @@ public class ExcelApiTest {
 				return text;
 			}
 			else if(cell.getCellType() == Cell.CELL_TYPE_BLANK) {
+				if((colNum = 1) == Cell.CELL_TYPE_BLANK) {
+					return " ";
+				}
+				else
 				return null;
 			}
 			else{

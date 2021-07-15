@@ -1,6 +1,40 @@
-mesajVeriIcerigi VERITIPI
-uzmeID UINT32
-suSicakligi UINT8
-baglantiDurumu1 UINT8
-baglantiDurumu2_3 UINT8
-modullerceHata UINT8
+message emreParametreleriCevap {
+	id = 00035
+	uzmeID UINT32
+ }
+message volkanIstek {
+	id = 0038
+	null null
+ }
+message ahmetCevap {
+	id = 0x0000FA01
+	suSicakligi UINT8
+ }
+message denizVersiyon {
+	id = 0005
+	null null
+ }
+message sefaCevap {
+	id = 0012
+	null null
+ }
+message LOREM {
+	id = 0x0101
+	null null
+ }
+message IPSUM {
+	id = 0x0102
+	null null
+ }
+message DOLOR {
+	id = 0x0106
+	null null
+ }
+message SIT {
+	id = 0x010B
+	null null
+ }
+message AMET {
+	id = 0x010C
+	null null
+ }
