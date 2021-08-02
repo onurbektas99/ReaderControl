@@ -46,7 +46,7 @@ public class ExcelDataReader {
     			writer.writeToFile(result);
     			writer.writeToConsole(result);
     			StringBuffer sb= new StringBuffer(result);  
-   			 sb.deleteCharAt(sb.length()-25);  
+   			 sb.deleteCharAt(sb.length()-2);  
     		}
     		
     		
