@@ -17,6 +17,10 @@ public class ExcelDataReader {
     	ExcelApiTest excelapi = new ExcelApiTest("/Users/onurbektas/Ekinoks/Ekinoks_Test_Excel.xlsx");
     	System.out.print(excelapi.getCellData(num,3,12) + " ");
     	System.out.println(excelapi.getCellData(num, 6, 12) + " ");
+    	
+    	
+    	StringBuilder sb = new StringBuilder();
+    	
     	for(int i=17; i<=85; i++) { // tüm satırları tek tek okumak için döngü yapmıştım. ahmet cevabın olduğu 22.satırdaki karşılık neyse onu gösteriyor
     		String col0 = excelapi.getCellData(num, 0, i); //mesaj adı
     		String col1 = excelapi.getCellData(num, 1, i); // mesaj kodu
@@ -24,45 +28,45 @@ public class ExcelDataReader {
     		String col6 = excelapi.getCellData(num, 6, i); // veri tipi
     		
     		
-    		String result = "message " + col0 + " {\n";
-    		String result2 = null;
-    		if(col0 != null) 
-    		{
-
-    			if(col1 != null)
-    			{
-    			
-    				result += "\tid = " + col1 + "\n";
-    			}
+    		// mesaj adı null değilse mesajı başlattık
+    		// mesaj adı null ise içine ekleyeceğiz
     		
-    			if(col3 != null && col6 != null)
-    			{
+    		
+    		if(col0 != null) {
+    		
+    			// mesaj adı null değilse önceki mesajı yazdır
     			
-    				result += "\t" + col3 + " " + col6;
+    			// condition eklememiz lazm
+    			
+    			if(!sb.toString().equals("")) {
+    				
+    				
+    				// yazdırmadan önce parantezi kapat
+    				
+    				sb.append("\n}");
+    				writer.writeToConsole(sb.toString());
+    				
+    				// yazdırdıktan sonra string builderi temizle
+    				sb = new StringBuilder();
     			}
     			
-    			result += "\n}";
-    			
-    			writer.writeToFile(result);
-    			writer.writeToConsole(result);
-    			StringBuffer sb= new StringBuffer(result);  
-   			 sb.deleteCharAt(sb.length()-2);  
+    			sb.append("message ");
+    			sb.append(col0);
+    			sb.append(" {\n");
     		}
     		
-    		
-    		 if(col0==null && col3!=null)
-    		 {
-    			 StringBuffer sb= new StringBuffer(result);  
-    			 sb.deleteCharAt(sb.length()-1);  
-    			 result2 = excelapi.messages(col0, col3, col6);
-    			writer.writeToFile(result2);
-    			writer.writeToConsole(result2);
+    		if (col3 != null || col1 != null) {
+    			
+    			// bunu bir koşula kadar yazmalıyız
+    			// o koşulu sonraki mesaj adı görene kadar yapabiliriz şimdilik
+    			sb.append(MessageStringUtil.buildMessageContent(col1, col3, col6));
     		}
-    	
     	}
 
     	in.close();
     	writer.closeFileWriter();
 	}
+	
+	
 
 }

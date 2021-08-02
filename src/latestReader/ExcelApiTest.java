@@ -47,14 +47,9 @@ public class ExcelApiTest {
 			if(cell.getCellType() == Cell.CELL_TYPE_STRING)
 			{
 				String text = cell.getStringCellValue();
-				Pattern pattern = Pattern.compile("['*!^&%=.?-]");
+				Pattern pattern = Pattern.compile("[+/'*!^&%=.?-]+");
 				Matcher matcher = pattern.matcher(text);
-				//text=text.replaceAll("[-]", " ");
-				//text=text.replaceAll("[.]", "_");
-                //text=text.replaceAll("ı", "i");
-				text = matcher.replaceFirst("_");
-				matcher=pattern.matcher(text);
-				text = matcher.replaceAll("");
+				text = matcher.replaceAll("_");
 				text = StringUtils.stripAccents(text);
                 if(colNum == 6) {
                     text = convert(text);
@@ -196,7 +191,7 @@ public class ExcelApiTest {
 				result2 = "\t" + y + " " + z;
 			
 		
-		return result2 + "\n";
+		return result2;
 		
 	}
 }
