@@ -6,6 +6,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Console;
 import java.util.regex.Pattern;
+import java.util.ArrayList;
 import java.util.regex.Matcher;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.hssf.usermodel.HSSFDateUtil;
@@ -15,6 +16,9 @@ import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.apache.xmlbeans.impl.soap.Text;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class ExcelApiTest {
 	
@@ -26,17 +30,21 @@ public class ExcelApiTest {
 	public String converter;
 	int num_holder;
 	private String result2;
-	public ExcelApiTest(String xlFilePath) throws Exception {
-		
-		fis = new FileInputStream(xlFilePath);
-		workbook = new XSSFWorkbook(fis);
-		fis.close();
+	public ExcelApiTest(String xlFilePath)  {
+		try {
+			fis = new FileInputStream(xlFilePath);
+			workbook = new XSSFWorkbook(fis);
+			fis.close();
+		}
+		catch(Exception e) {
+			System.out.println("HATA"+e.toString());
+		}
+	
 		
 	}
 	
 	public String getCellData(int num, int colNum, int rowNum)
-	{
-
+	{ 
 		try
 		{
 			this.num_holder=num;
@@ -47,6 +55,7 @@ public class ExcelApiTest {
 			if(cell.getCellType() == Cell.CELL_TYPE_STRING)
 			{
 				String text = cell.getStringCellValue();
+				String text2 =cell.getStringCellValue();
 				Pattern pattern = Pattern.compile("[+/'*!^&%=.?-]+");
 				Matcher matcher = pattern.matcher(text);
 				text = matcher.replaceAll("_");
@@ -56,7 +65,6 @@ public class ExcelApiTest {
                 	text = text.toUpperCase();
                 	text = StringUtils.stripAccents(text);
     				return text;
-    				
                 }
                 if(colNum == 0) {
                 	text = convert(text);
@@ -67,13 +75,24 @@ public class ExcelApiTest {
                 }
                 if(colNum == 3)
                 {
-                	text=text.toLowerCase();
-                	text = convert(text);
-                    text=text.replaceAll("ı", "i");
-                	return text;
+                	
+                if(text.equals("{")) {
+                	
+                	text = "dynamicList[]" + text.toLowerCase();
+                	
                 }
-                else
+                else {
+                	
+                	text=text.toLowerCase();
+                }
+                
+                text = convert(text);
+                text=text.replaceAll("ı", "i");
+                return text;
+                }
+                else {
 				return text;
+                }
 			}
 			else if(cell.getCellType() == Cell.CELL_TYPE_BLANK)
 			{
@@ -129,6 +148,7 @@ public class ExcelApiTest {
 	    }
 	    return String.valueOf(ch, 0, n - cnt);
 	}
+	
 	public String classConvention(String s)
 	{
 	    int cnt= 0;
@@ -194,4 +214,6 @@ public class ExcelApiTest {
 		return result2;
 		
 	}
+	
+	
 }

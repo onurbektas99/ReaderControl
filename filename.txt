@@ -1,0 +1,48 @@
+message EmreParametreleriCevap {
+	id = 00035
+	uzmeId UINT32
+
+}
+message VolkanIstek {
+	id = 0038
+
+}
+message AhmetCevap {
+	id = 0x0000FA01
+	suSicakligi UINT8
+	baglantiDurumu_1 UINT8
+	baglantiDurumu_2_3 UINT8
+	dynamicList[]{
+	baglantiDurumu_2_4 UINT16
+	eleme435Aasdfeedadfnt2 UINT8
+	dynamicList[]{
+	ddddr8758_ UINT8
+	element4 UINT9
+	}
+	dynamicList[]{
+	listInAnotherCell234
+	}
+	}
+	modullerceHata_AkAs UINT8
+
+}
+message DenizVersiyon {
+	id = 0005
+
+}
+message SefaCevap {
+	id = 0012
+
+}
+message Lorem {
+	id = 0x0101
+
+}
+message Ipsum {
+	id = 0x0102
+
+}
+message Dolor {
+	id = 0x0106
+
+}

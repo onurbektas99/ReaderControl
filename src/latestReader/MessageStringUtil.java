@@ -20,6 +20,11 @@ public class MessageStringUtil {
 			sb.append(col6);
 			sb.append("\n");
 		}
+		else if(col3 != null) {
+			sb.append("\t");
+			sb.append(col3);
+			sb.append("\n");
+		}
 		
 		return sb.toString();
 	}
